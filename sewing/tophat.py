@@ -11,7 +11,8 @@ Helpful notes:
 
 import threading 
 import os 
-  
+import time
+
 def task1():
     print("Task 1 assigned to thread: {}".format(threading.current_thread().name))
     print("ID of process running task 1: {}".format(os.getpid())) 
@@ -20,6 +21,11 @@ def task1():
 def task2(): 
     print("Task 2 assigned to thread: {}".format(threading.current_thread().name))            
     print("ID of process running task 2: {}".format(os.getpid())) 
+
+def task3():
+    for i in range(5, -1, -1):
+         print(i)
+         
 
 def main():
     # print ID of current process 
@@ -31,15 +37,21 @@ def main():
     # creating threads 
     t1 = threading.Thread(target=task1, name='t1') 
     t2 = threading.Thread(target=task2, name='t2')   
-  
+    t3 = threading.Thread(target=task3, name='t3')
     # starting threads 
+    t3.start()
     t1.start() 
+    
     t2.start() 
-  
+    
     # wait until all threads finish 
     t1.join() 
     t2.join() 
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     main()
+
+
+
+
 
